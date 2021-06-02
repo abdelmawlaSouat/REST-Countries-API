@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  span {
+    margin-left: 10px;
+  }
+
+  svg {
+    color: lightsalmon;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
