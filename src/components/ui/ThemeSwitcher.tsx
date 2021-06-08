@@ -4,13 +4,13 @@
  * Email: abdelmawla.souat@gmail.com
  * -----
  * Created at: 2021-06-02 5:00:10 pm
- * Last Modified: 2021-06-02 6:58:53 pm
+ * Last Modified: 2021-06-07 6:53:01 pm
  * -----
  * Copyright (c) 2021 Yuei
  */
 
 import { useEffect, useState } from 'react';
-import { BsMoon } from 'react-icons/bs';
+import { FiMoon } from 'react-icons/fi';
 import { BiSun } from 'react-icons/bi';
 import scss from './ThemeSwitcher.module.scss';
 
@@ -32,7 +32,7 @@ export default function ThemeSwitcher() {
 
   function setStates(theme: string): void {
     if (theme === 'dark') {
-      setIconType(<BsMoon />);
+      setIconType(<FiMoon />);
       setThemeMode('Dark Mode');
     } else {
       setIconType(<BiSun />);

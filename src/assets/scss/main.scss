@@ -1,0 +1,9 @@
+@import './responsive.scss';
+@import './fonts.scss';
+@import './theme.scss';
+
+body {
+  font-family: 'Nunito-Sans';
+  background-color: var(--bg);
+  transition: background 0.2s ease;
+}
