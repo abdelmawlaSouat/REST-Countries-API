@@ -4,25 +4,36 @@
  * Email: abdelmawla.souat@gmail.com
  * -----
  * Created at: 2021-06-02 3:26:50 pm
- * Last Modified: 2021-06-07 7:16:43 pm
+ * Last Modified: 2021-06-08 4:37:58 pm
  * -----
  * Copyright (c) 2021 Yuei
  */
 
-import React from 'react';
+import { useState } from 'react';
+
 import scss from './Home.module.scss';
 import Header from '../components/Header';
 import SearchBar from '../components/ui/SearchBar';
 
-function App() {
+function Home() {
+  const [researchValue, setResearchValue] = useState<string>('');
+
+  function handleResearchValue(newValue: string): any {
+    setResearchValue(newValue);
+  }
+
   return (
-    <div className={scss.app}>
+    <div className={scss.home}>
       <Header />
       <div className={scss.searchBarAndFiltersContainer}>
-        <SearchBar placeholder="Search a country..." />
+        <SearchBar
+          handleResearchValue={handleResearchValue}
+          researchValue={researchValue}
+          placeholder="Search a country..."
+        />
       </div>
     </div>
   );
 }
 
-export default App;
+export default Home;
