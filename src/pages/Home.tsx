@@ -4,7 +4,7 @@
  * Email: abdelmawla.souat@gmail.com
  * -----
  * Created at: 2021-06-02 3:26:50 pm
- * Last Modified: 2021-06-08 4:37:58 pm
+ * Last Modified: 2021-06-08 5:47:59 pm
  * -----
  * Copyright (c) 2021 Yuei
  */
@@ -14,6 +14,7 @@ import { useState } from 'react';
 import scss from './Home.module.scss';
 import Header from '../components/Header';
 import SearchBar from '../components/ui/SearchBar';
+import FiltersSelects from '../components/ui/FiltersSelects';
 
 function Home() {
   const [researchValue, setResearchValue] = useState<string>('');
@@ -30,6 +31,16 @@ function Home() {
           handleResearchValue={handleResearchValue}
           researchValue={researchValue}
           placeholder="Search a country..."
+        />
+        <FiltersSelects
+          title="Filter by Region"
+          filters={[
+            { id: 0, value: 'Africa' },
+            { id: 1, value: 'America' },
+            { id: 2, value: 'Asia' },
+            { id: 3, value: 'Europe' },
+            { id: 4, value: 'Oceania' },
+          ]}
         />
       </div>
     </div>
