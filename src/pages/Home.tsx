@@ -4,34 +4,33 @@
  * Email: abdelmawla.souat@gmail.com
  * -----
  * Created at: 2021-06-02 3:26:50 pm
- * Last Modified: 2021-06-08 6:33:25 pm
+ * Last Modified: 2021-06-10 2:43:44 pm
  * -----
  * Copyright (c) 2021 Yuei
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import scss from './Home.module.scss';
 import Header from '../components/Header';
 import SearchBar from '../components/ui/SearchBar';
 import FiltersSelects from '../components/ui/FiltersSelects';
 import CountryCard from '../components/ui/CountryCard';
-
-interface Country {
-  flag: string;
-  name: string;
-  population: number;
-  region: string;
-  capital: string;
-}
+import CountryInterface from '../interfaces/Country';
 
 function Home() {
   const [researchValue, setResearchValue] = useState<string>('');
   const [isCountriesLoaded, setIsCountriesLoaded] = useState<boolean>(false);
-  const [countriesList, setCountriesList] = useState<any>([]);
+  const [countriesList, setCountriesList] = useState([]);
+  let allCountries = useRef<any>(null);
 
-  function handleResearchValue(newValue: string): any {
+  function handleResearchValue(newValue: string): void {
+    // if (newValue.length === 0) setCountriesList(allCountries.current);
     setResearchValue(newValue);
+  }
+
+  function handleCountriesList(newList: any): void {
+    setCountriesList(newList);
   }
 
   useEffect(() => {
@@ -40,8 +39,8 @@ function Home() {
     )
       .then((res) => res.json())
       .then((countriesList) => {
-        console.log(countriesList.length);
-        setCountriesList(countriesList);
+        allCountries.current = countriesList;
+        setCountriesList(allCountries.current);
         setIsCountriesLoaded(true);
       });
   }, []);
@@ -51,9 +50,15 @@ function Home() {
       <Header />
       <div className={scss.searchBarAndFiltersContainer}>
         <SearchBar
-          handleResearchValue={handleResearchValue}
-          researchValue={researchValue}
-          placeholder="Search a country..."
+          research={{
+            placeholder: 'Search a country...',
+            handleResearchValue,
+            researchValue,
+          }}
+          countries={{
+            countriesList: allCountries.current,
+            handleCountriesList,
+          }}
         />
         <FiltersSelects
           title="Filter by Region"
@@ -68,7 +73,7 @@ function Home() {
       </div>
       <div className={scss.countriesList}>
         {isCountriesLoaded &&
-          countriesList.map((country: Country) => (
+          countriesList.map((country: CountryInterface) => (
             <CountryCard key={country.name} country={country} />
           ))}
       </div>

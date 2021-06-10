@@ -4,24 +4,17 @@
  * Email: abdelmawla.souat@gmail.com
  * -----
  * Created at: 2021-06-02 4:51:20 pm
- * Last Modified: 2021-06-08 7:23:26 pm
+ * Last Modified: 2021-06-10 1:43:20 pm
  * -----
  * Copyright (c) 2021 Yuei
  */
 
 import { FC } from 'react';
+import CountryInterface from '../../interfaces/Country';
 import scss from './CountryCard.module.scss';
 
-interface Country {
-  flag: string;
-  name: string;
-  population: number;
-  region: string;
-  capital: string;
-}
-
 interface Props {
-  country: Country;
+  country: CountryInterface;
 }
 
 const CountryCard: FC<Props> = ({ children, ...props }) => {
