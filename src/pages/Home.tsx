@@ -4,15 +4,15 @@
  * Email: abdelmawla.souat@gmail.com
  * -----
  * Created at: 2021-06-02 3:26:50 pm
- * Last Modified: 2021-06-10 4:28:31 pm
+ * Last Modified: 2021-06-10 11:32:48 pm
  * -----
  * Copyright (c) 2021 Yuei
  */
 
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import scss from './Home.module.scss';
-import Header from '../components/Header';
 import SearchBar from '../components/ui/SearchBar';
 import FiltersSelects from '../components/ui/FiltersSelects';
 import CountryCard from '../components/ui/CountryCard';
@@ -51,7 +51,6 @@ function Home() {
 
   return (
     <div className={scss.home}>
-      <Header />
       <div className={scss.searchBarAndFiltersContainer}>
         <SearchBar
           research={{
@@ -87,8 +86,18 @@ function Home() {
       <div className={scss.countriesList}>
         {isCountriesLoaded &&
           countriesList.map((country: CountryInterface) => (
-            <CountryCard key={country.name} country={country} />
+            <Link
+              key={country.name}
+              to={`/country/${country.name.toLowerCase()}`}
+            >
+              <CountryCard country={country} />
+            </Link>
           ))}
+        {isCountriesLoaded && countriesList.length === 0 && (
+          <span
+            className={scss.errorMsg}
+          >{`Sorry, no results were found for "${researchValue}".`}</span>
+        )}
       </div>
     </div>
   );

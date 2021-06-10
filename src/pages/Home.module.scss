@@ -9,6 +9,14 @@
 
 .countriesList {
   margin: 1.5rem;
+  a {
+    text-decoration: none;
+  }
+}
+
+.errorMsg {
+  color: var(--text-color);
+  font-size: 1.7rem;
 }
 
 @media screen and (min-width: $lg_screen) {
