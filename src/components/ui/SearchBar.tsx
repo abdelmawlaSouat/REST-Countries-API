@@ -4,7 +4,7 @@
  * Email: abdelmawla.souat@gmail.com
  * -----
  * Created at: 2021-06-02 4:49:05 pm
- * Last Modified: 2021-06-10 3:28:25 pm
+ * Last Modified: 2021-06-10 4:36:22 pm
  * -----
  * Copyright (c) 2021 Yuei
  */
@@ -12,6 +12,7 @@
 import { FC } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import CountryInterface from '../../interfaces/Country';
+import CountriesInterface from '../../interfaces/Countries';
 import scss from './SearchBar.module.scss';
 
 interface Research {
@@ -20,17 +21,14 @@ interface Research {
   handleResearchValue(newValue: string): any;
 }
 
-interface Countries {
-  countriesList: CountryInterface[];
-  handleCountriesList(newList: CountryInterface[]): void;
-}
-
 interface Props {
   research: Research;
-  countries: Countries;
+  countries: CountriesInterface;
+  activeFilter: string;
 }
 
 const SearchBar: FC<Props> = ({ children, ...props }) => {
+  const { activeFilter } = props;
   const { placeholder, researchValue, handleResearchValue } = props.research;
   const { countriesList, handleCountriesList } = props.countries;
 
@@ -41,7 +39,10 @@ const SearchBar: FC<Props> = ({ children, ...props }) => {
     const newList = countriesList.filter((country) => {
       const { capital, name, region } = country;
 
-      return regex.test(name) || regex.test(capital) || regex.test(region);
+      return (
+        (activeFilter === 'all' || region === activeFilter) &&
+        (regex.test(name) || regex.test(capital) || regex.test(region))
+      );
     });
     return newList;
   }

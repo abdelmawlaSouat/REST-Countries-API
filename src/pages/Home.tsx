@@ -4,7 +4,7 @@
  * Email: abdelmawla.souat@gmail.com
  * -----
  * Created at: 2021-06-02 3:26:50 pm
- * Last Modified: 2021-06-10 2:43:44 pm
+ * Last Modified: 2021-06-10 4:28:31 pm
  * -----
  * Copyright (c) 2021 Yuei
  */
@@ -22,15 +22,19 @@ function Home() {
   const [researchValue, setResearchValue] = useState<string>('');
   const [isCountriesLoaded, setIsCountriesLoaded] = useState<boolean>(false);
   const [countriesList, setCountriesList] = useState([]);
+  const [filter, setFilter] = useState<string>('all');
   let allCountries = useRef<any>(null);
 
   function handleResearchValue(newValue: string): void {
-    // if (newValue.length === 0) setCountriesList(allCountries.current);
     setResearchValue(newValue);
   }
 
   function handleCountriesList(newList: any): void {
     setCountriesList(newList);
+  }
+
+  function handleFilter(newFilter: string) {
+    setFilter(newFilter);
   }
 
   useEffect(() => {
@@ -59,16 +63,25 @@ function Home() {
             countriesList: allCountries.current,
             handleCountriesList,
           }}
+          activeFilter={filter}
         />
         <FiltersSelects
           title="Filter by Region"
+          activeFilter={{
+            filter,
+            handleFilter,
+          }}
           filters={[
             { id: 0, value: 'Africa' },
-            { id: 1, value: 'America' },
+            { id: 1, value: 'Americas' },
             { id: 2, value: 'Asia' },
             { id: 3, value: 'Europe' },
             { id: 4, value: 'Oceania' },
           ]}
+          countries={{
+            countriesList: allCountries.current,
+            handleCountriesList,
+          }}
         />
       </div>
       <div className={scss.countriesList}>
