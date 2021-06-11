@@ -6,6 +6,12 @@
   margin: 3rem 1rem;
   border-radius: 5px;
   box-shadow: 0px 1px 5px 1px var(--shadow-color);
+  transition: all 0.1s ease-in;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
 
   img {
     width: 100%;

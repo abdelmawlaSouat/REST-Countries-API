@@ -4,7 +4,7 @@
  * Email: abdelmawla.souat@gmail.com
  * -----
  * Created at: 2021-06-02 5:00:10 pm
- * Last Modified: 2021-06-07 6:53:01 pm
+ * Last Modified: 2021-06-11 12:43:23 pm
  * -----
  * Copyright (c) 2021 Yuei
  */
@@ -15,8 +15,8 @@ import { BiSun } from 'react-icons/bi';
 import scss from './ThemeSwitcher.module.scss';
 
 export default function ThemeSwitcher() {
-  const [iconType, setIconType] = useState<JSX.Element | null>();
-  const [themeMode, setThemeMode] = useState<string | null>();
+  const [iconType, setIconType] = useState<JSX.Element | null>(<BiSun />);
+  const [themeMode, setThemeMode] = useState<string | null>('Light Mode');
 
   useEffect((): void => {
     if (!localStorage.getItem('theme')) {
