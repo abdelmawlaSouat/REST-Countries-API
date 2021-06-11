@@ -4,7 +4,7 @@
  * Email: abdelmawla.souat@gmail.com
  * -----
  * Created at: 2021-06-02 3:26:50 pm
- * Last Modified: 2021-06-10 11:32:48 pm
+ * Last Modified: 2021-06-11 1:06:56 pm
  * -----
  * Copyright (c) 2021 Yuei
  */
@@ -33,7 +33,7 @@ function Home() {
     setCountriesList(newList);
   }
 
-  function handleFilter(newFilter: string) {
+  function handleFilter(newFilter: string): void {
     setFilter(newFilter);
   }
 

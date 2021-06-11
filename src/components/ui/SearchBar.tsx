@@ -4,7 +4,7 @@
  * Email: abdelmawla.souat@gmail.com
  * -----
  * Created at: 2021-06-02 4:49:05 pm
- * Last Modified: 2021-06-10 4:36:22 pm
+ * Last Modified: 2021-06-11 1:17:16 pm
  * -----
  * Copyright (c) 2021 Yuei
  */
@@ -47,8 +47,7 @@ const SearchBar: FC<Props> = ({ children, ...props }) => {
     return newList;
   }
 
-  function onChangeResearch(event: any) {
-    const value = event.target.value;
+  function onChangeResearch(value: any) {
     const newCountriesList = getMatchingResearch(value);
 
     handleCountriesList(newCountriesList);
@@ -65,7 +64,7 @@ const SearchBar: FC<Props> = ({ children, ...props }) => {
         id="research"
         placeholder={placeholder}
         value={researchValue}
-        onChange={(e) => onChangeResearch(e)}
+        onChange={(e) => onChangeResearch(e.target.value)}
       />
     </div>
   );
