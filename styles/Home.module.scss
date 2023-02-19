@@ -1,0 +1,33 @@
+@import '../assets/scss/responsive.scss';
+
+.home {
+  text-align: center;
+}
+.searchBarAndFiltersContainer {
+  margin: 2rem 1.5rem;
+}
+
+.countriesList {
+  margin: 1.5rem;
+  a {
+    text-decoration: none;
+  }
+}
+
+.errorMsg {
+  color: var(--text-color);
+  font-size: 1.7rem;
+}
+
+@media screen and (min-width: $lg_screen) {
+  .countriesList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .searchBarAndFiltersContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

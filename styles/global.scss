@@ -1,0 +1,30 @@
+@import "./responsive.scss";
+
+@font-face {
+  font-family: "Nunito-Sans";
+  src: url("../fonts/Nunito_Sans/NunitoSans-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.dark {
+  --elements-color: hsl(209, 23%, 22%);
+  --text-color: hsl(0, 0%, 94%);
+  --input-color: hsl(0, 0%, 100%);
+  --shadow-color: hsla(0, 0%, 15%, 0.411);
+  --bg: hsl(207, 26%, 17%);
+}
+
+.light {
+  --elements-color: hsl(0, 0%, 100%);
+  --text-color: hsl(200, 15%, 8%);
+  --input-color: hsl(0, 0%, 52%);
+  --shadow-color: hsla(0, 0%, 61%, 0.452);
+  --bg: hsl(0, 0%, 98%);
+}
+
+body {
+  font-family: "Nunito-Sans";
+  background-color: var(--bg);
+  transition: background 0.2s ease;
+}
