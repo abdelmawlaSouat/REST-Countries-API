@@ -1,48 +1,57 @@
-import { useEffect, useRef, useState } from "react";
-
-import styles from "../styles/Home.module.scss";
-import SearchBar from "../components/searchBar/SearchBar";
-import FiltersSelects from "../components/ui/FiltersSelects";
+import styles from "styles/Home.module.scss";
 import CountryCard from "../components/countryCard/CountryCard";
-import CountryInterface from "../types/Country";
-import { NextPage } from "next";
+import { CountryOverview } from "../types/CountryOverview";
 import Link from "next/link";
+import { getAllCountries } from "services/getAllCountries";
 
-const Home: NextPage = () => {
-  const [researchValue, setResearchValue] = useState<string>("");
-  const [isCountriesLoaded, setIsCountriesLoaded] = useState<boolean>(false);
-  const [countriesList, setCountriesList] = useState([]);
-  const [filter, setFilter] = useState<string>("all");
-  let allCountries = useRef<any>(null);
+interface Props {
+  countries: CountryOverview[];
+}
 
-  function handleResearchValue(newValue: string): void {
-    setResearchValue(newValue);
-  }
+export default function Page({ countries }: Props) {
+  // const [researchValue, setResearchValue] = useState("");
+  // const [isFetched, setIsFetched] = useState(false);
+  // const [countriesList, setCountriesList] = useState([]);
+  // const [filter, setFilter] = useState<string>("all");
+  // let allCountries = useRef<any>(null);
 
-  function handleCountriesList(newList: any): void {
-    setCountriesList(newList);
-  }
+  // function handleResearchValue(newValue: string): void {
+  //   setResearchValue(newValue);
+  // }
 
-  function handleFilter(newFilter: string): void {
-    setFilter(newFilter);
-  }
+  // function handleCountriesList(newList: any): void {
+  //   setCountriesList(newList);
+  // }
 
-  useEffect(() => {
-    fetch(
-      "https://restcountries.eu/rest/v2/all?fields=name;capital;region;population;flag"
-    )
-      .then((res) => res.json())
-      .then((countriesList) => {
-        allCountries.current = countriesList;
-        setCountriesList(allCountries.current);
-        setIsCountriesLoaded(true);
-      });
-  }, []);
+  // function handleFilter(newFilter: string): void {
+  //   setFilter(newFilter);
+  // }
+
+  // useEffect(() => {
+  //   const getAllCountries = async () => {
+  //     const result = await fetch("/api/get-all-countries", { method: "GET" });
+  //     const { data, error } = await result.json();
+
+  //     if (error) {
+  //       throw new Error(error);
+  //     }
+
+  //     setCountriesList(data.slice(0, 21));
+  //   };
+
+  //   getAllCountries();
+  // }, []);
+
+  // useEffect(() => {
+  //   setIsFetched(isFetched);
+  // }, [countriesList, isFetched]);
+
+  console.log("countries", countries);
 
   return (
     <div className={styles.home}>
       <div className={styles.searchBarAndFiltersContainer}>
-        <SearchBar
+        {/* <SearchBar
           research={{
             placeholder: "Search a country...",
             handleResearchValue,
@@ -53,9 +62,9 @@ const Home: NextPage = () => {
             handleCountriesList,
           }}
           activeFilter={filter}
-        />
+        /> */}
 
-        <FiltersSelects
+        {/* <FiltersSelects
           title="Filter by Region"
           activeFilter={{
             filter,
@@ -72,26 +81,35 @@ const Home: NextPage = () => {
             countriesList: allCountries.current,
             handleCountriesList,
           }}
-        />
+        /> */}
       </div>
+
       <div className={styles.countriesList}>
-        {isCountriesLoaded &&
-          countriesList.map((country: CountryInterface) => (
-            <Link
-              key={country.name}
-              to={`/country/${country.name.toLowerCase()}`}
-            >
-              <CountryCard country={country} />
-            </Link>
-          ))}
-        {isCountriesLoaded && countriesList.length === 0 && (
+        {countries.map((country) => (
+          <Link
+            key={country.name.common}
+            href={`/country/${country.name.common.toLowerCase()}`}
+          >
+            <CountryCard country={country} />
+          </Link>
+        ))}
+
+        {/* {isFetched && !!countriesList.length && (
           <span
             className={styles.errorMsg}
           >{`Sorry, no results were found for "${researchValue}".`}</span>
-        )}
+        )} */}
       </div>
     </div>
   );
-};
+}
 
-export default Home;
+export async function getStaticProps() {
+  const countries = await getAllCountries({});
+
+  return {
+    props: {
+      countries,
+    },
+  };
+}

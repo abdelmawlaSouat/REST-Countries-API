@@ -1,4 +1,4 @@
-@import '../../assets/scss/responsive.scss';
+@import "../../styles/responsive.scss";
 
 .card {
   color: var(--text-color);
@@ -12,36 +12,36 @@
     cursor: pointer;
     transform: scale(1.1);
   }
+}
 
-  img {
-    width: 100%;
+.content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 1.5rem 1.5rem 3rem 1.5rem;
+  p {
+    margin: 0.3rem 0;
+    font-size: 1.1rem;
   }
-  .content {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    padding: 1.5rem 1.5rem 3rem 1.5rem;
-    p {
-      margin: 0.3rem 0;
-      font-size: 1.1rem;
-    }
-    .title {
-      font-size: 1.4rem;
-      font-weight: bolder;
-      margin: 1rem 0 1.5rem 0;
-    }
-  }
+}
+
+.title {
+  font-size: 1.4rem;
+  font-weight: bolder;
+  margin: 1rem 0 1.5rem 0;
 }
 
 .bolder {
   font-weight: bolder;
 }
 
-@media screen and (min-width: $lg_screen) {
-  .card {
-    img {
-      width: 20rem;
-      height: 13rem;
-    }
+.imgWrapper {
+  position: relative;
+  width: 250px;
+  height: 156px;
+
+  @media screen and (min-width: $md_screen) {
+    width: 350px;
+    height: 219px;
   }
 }
